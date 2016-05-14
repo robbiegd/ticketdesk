@@ -65,14 +65,13 @@ error_reporting(E_ALL);
                     </ul>
                 </li>
             </ul>
-
+            <p class="navbar-text">User: <?php echo ''. $_SESSION['username']; ?><a href="./include/logout.php"> log out?</a></p>
             <form class="navbar-form navbar-right" role="search">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Search">
                 </div>
                 <button type="submit" class="btn btn-default">Submit</button>
             </form>
-            <p class="navbar-text">Agent: Peter Parker</p>
         </div> <!-- /.navbar-collapse -->        
     </div> <!-- /. nav -->    
 </nav>

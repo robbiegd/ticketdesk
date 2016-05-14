@@ -1,6 +1,16 @@
-<?php
-include_once('include/navbar.php');
+<?php 
+include_once 'include/functions.php';
+include_once 'include/connect.php';
+sec_session_start(); 
 
+if(login_check(dbConnect()) == true) {
+	include_once('include/navbar.php');
+	
+        // Add your protected page content here!
+?>
+
+
+<?php
 
 if (isset($_POST['addCategory'])) {
 	$category = new category();
@@ -143,3 +153,12 @@ $(document).ready(function($) {
 
 </div>
 </body>
+
+<?php
+// end protected content
+} else { 
+        echo 'You are not authorized to access this page redirecting you to the <a href="./index.php">login page</a>.';
+        echo '<META http-equiv="refresh" content="2;URL=./index.php">';        
+}
+
+?>

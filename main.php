@@ -1,6 +1,12 @@
 <?php 
-include_once('include/navbar.php');
+include_once 'include/functions.php';
+include_once 'include/connect.php';
+sec_session_start(); 
 
+if(login_check(dbConnect()) == true) {
+	include_once('include/navbar.php');
+	
+        // Add your protected page content here!
 ?>
 
 <script>
@@ -63,7 +69,7 @@ if (isset($_POST['addQuickTicket'])) {
         <div class="panel-body">
             <form class="form-horizontal" method="POST" action="#">
                 <div class="form-group">
-                    <input type="text" name="user" value="pparker" hidden />
+                    <input type="text" name="user" value="<?php echo '' . $_SESSION['username']; ?>" hidden />
                     <label for="clientNumber" class="col-sm-2 control-label">Client #</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" name="clientNumber" placeholder="e.g. 912752">
@@ -129,3 +135,12 @@ Total Tickets: <?php echo ''. ticket::getTicketCount(); ?> <br>  Average Daily: 
 
 </div> <!-- /content-->
 </body>
+
+<?php
+// end protected content
+} else { 
+        echo 'You are not authorized to access this page redirecting you to the <a href="./index.php">login page</a>.';
+        echo '<META http-equiv="refresh" content="2;URL=./index.php">';        
+}
+
+?>
